@@ -1,0 +1,715 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: "GreaterTheory";
+  src: url("/fonts/GreaterTheory.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* =========================================================
+   HOME CONTAINER
+   ========================================================= */
+
+.home-container {
+  position: relative;
+
+  width: 100%;
+  min-height: 100dvh;
+
+  overflow-x: hidden;
+
+  display: grid;
+}
+
+/* =========================================================
+   LYRICS INTRO
+   ========================================================= */
+
+.home-lyrics {
+  grid-area: 1 / 1;
+
+  position: relative;
+  z-index: 10;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background-color: #071d36;
+
+  background-image:
+    linear-gradient(
+      rgba(117, 165, 205, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(117, 165, 205, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      rgba(117, 165, 205, 0.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(117, 165, 205, 0.07) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    45px 45px,
+    45px 45px,
+    9px 9px,
+    9px 9px;
+
+  color: white;
+
+  font-family: "GreaterTheory", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 1px;
+
+  word-wrap: break-word;
+
+  padding: 12vh 5vw 0;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+
+.goat {
+  display: inline-block;
+
+  color: #ff3131;
+  font-weight: 900;
+
+  text-shadow:
+    0 0 8px rgba(255, 49, 49, 0.9),
+    0 0 16px rgba(255, 49, 49, 0.8),
+    0 0 24px rgba(255, 49, 49, 0.6);
+
+  transform: scale(1.1);
+}
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.home-page {
+  --blueprint: #071d36;
+  --line: rgba(117, 165, 205, 0.18);
+  --line-strong: rgba(117, 165, 205, 0.35);
+  --text: #e8edf2;
+  --muted: #7790a8;
+  --red: #ff3131;
+  --copper: #d19a78;
+
+  grid-area: 1 / 1;
+
+  position: relative;
+  z-index: 11;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: var(--blueprint);
+  color: var(--text);
+
+  font-family: "GreaterTheory", sans-serif;
+}
+
+/* =========================================================
+   BLUEPRINT GRID
+   ========================================================= */
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image:
+    linear-gradient(
+      var(--line) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--line) 1px,
+      transparent 1px
+    );
+
+  background-size: 45px 45px;
+
+  pointer-events: none;
+}
+
+.blueprint-grid::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(117, 165, 205, 0.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(117, 165, 205, 0.07) 1px,
+      transparent 1px
+    );
+
+  background-size: 9px 9px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   SHARED SCREEN CHROME
+   ========================================================= */
+
+.screen {
+  position: relative;
+  z-index: 5;
+
+  /*
+   * Exactly half the viewport.
+   * min-width: 0 prevents children from
+   * forcing the panel wider.
+   */
+  flex: 0 0 50%;
+
+  width: 50%;
+  min-width: 0;
+  max-width: 50%;
+
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.workbench-header {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 2vw;
+
+  padding: 5vh 5vw 0;
+}
+
+.workbench-header > div:first-child {
+  min-width: 0;
+}
+
+.eyebrow,
+.revision,
+.workbench-footer,
+.scroll-cue {
+  font-family: "Geist Mono", monospace;
+  letter-spacing: 2px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.workbench-header h1 {
+  margin-top: 0.4rem;
+
+  font-size: clamp(3rem, 5.2vw, 5.2rem);
+  line-height: 0.82;
+  letter-spacing: -2px;
+
+  overflow-wrap: break-word;
+}
+
+.revision {
+  display: flex;
+  flex-direction: column;
+
+  text-align: right;
+
+  color: var(--muted);
+
+  font-size: 0.65rem;
+
+  flex-shrink: 0;
+
+  white-space: nowrap;
+}
+
+.revision strong {
+  color: var(--text);
+  margin-top: 5px;
+}
+
+.workbench-footer {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 5vw 4vh;
+
+  color: var(--muted);
+
+  font-size: 0.55rem;
+}
+
+/* =========================================================
+   SCREEN 1 — BOOT
+   ========================================================= */
+
+.screen-boot {
+  justify-content: space-between;
+
+  padding-bottom: 4vh;
+}
+
+.terminal-wrap {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 3vh 4vw;
+
+  min-height: 0;
+}
+
+/* =========================================================
+   TERMINAL
+   ========================================================= */
+
+.terminal {
+  position: relative;
+
+  width: min(760px, 92%);
+  max-width: 100%;
+
+  height: min(560px, 65vh);
+  min-height: 380px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #05070c;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(117, 165, 205, 0.25);
+}
+
+/* =========================================================
+   TERMINAL TITLE BAR
+   ========================================================= */
+
+.terminal-titlebar {
+  flex-shrink: 0;
+
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 10px 0 14px;
+
+  background: linear-gradient(
+    180deg,
+    #1b2b3f,
+    #0d1620
+  );
+
+  border-bottom: 1px solid rgba(117, 165, 205, 0.2);
+}
+
+.terminal-icon {
+  color: var(--copper);
+
+  font-family: "Geist Mono", monospace;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.terminal-titlebar-label {
+  flex: 1;
+
+  color: rgba(232, 237, 242, 0.6);
+
+  font-family: "Geist Mono", monospace;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.5px;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.terminal-btn {
+  width: 24px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  color: rgba(232, 237, 242, 0.55);
+
+  font-size: 0.75rem;
+
+  line-height: 1;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.terminal-btn:hover {
+  background: rgba(117, 165, 205, 0.15);
+  color: var(--text);
+}
+
+.terminal-btn-close:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* =========================================================
+   TERMINAL BODY
+   ========================================================= */
+
+.terminal-body {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding: 22px 26px;
+
+  color: #e8edf2;
+
+  font-family: "Geist Mono", monospace;
+
+  font-size: clamp(
+    0.95rem,
+    1.6vw,
+    1.25rem
+  );
+
+  line-height: 1.6;
+
+  text-align: left;
+}
+
+.terminal-body h2 {
+  font-size: 1.25em;
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  margin: 0 0 4px;
+}
+
+.terminal-body p {
+  margin: 0 0 2px;
+
+  font-weight: 400;
+}
+
+.terminal-body strong {
+  color: var(--copper);
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   TYPING DOTS
+   ========================================================= */
+
+.ellipsis {
+  display: inline-block;
+
+  width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  vertical-align: bottom;
+
+  animation:
+    reveal-dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes reveal-dots {
+  to {
+    width: 3ch;
+  }
+}
+
+/* =========================================================
+   SCROLL CUE
+   ========================================================= */
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--muted);
+
+  font-size: 0.6rem;
+
+  flex-shrink: 0;
+}
+
+.scroll-arrow {
+  font-size: 1.1rem;
+
+  animation:
+    bob 1.6s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* =========================================================
+   SCREEN 2 — ORIGIN STORY
+   ========================================================= */
+
+.screen-story {
+  padding-bottom: 3vh;
+
+  min-height: 100dvh;
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline {
+  position: relative;
+
+  z-index: 5;
+
+  width: 88%;
+  max-width: 700px;
+
+  margin: 3vh auto 3vh;
+
+  padding-left: 28px;
+
+  min-width: 0;
+}
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  left: 6px;
+
+  top: 6px;
+  bottom: 6px;
+
+  width: 2px;
+
+  background: var(--line-strong);
+}
+
+.timeline-entry {
+  position: relative;
+
+  padding-bottom: 3.5vh;
+}
+
+.timeline-entry:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+
+  left: -28px;
+  top: 4px;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: var(--copper);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(209, 154, 120, 0.15);
+}
+
+/* =========================================================
+   TIMELINE LABEL
+   ========================================================= */
+
+.timeline-year {
+  display: block;
+
+  color: var(--copper);
+
+  font-family: "GreaterTheory", sans-serif;
+
+  font-size: 0.62rem;
+  font-weight: normal;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 7px;
+}
+
+/* =========================================================
+   TIMELINE STORY
+   ========================================================= */
+
+.timeline-entry p {
+  font-family: "GreaterTheory", sans-serif;
+
+  font-size: 0.72rem;
+  font-weight: normal;
+
+  line-height: 1.65;
+
+  color: var(--text);
+
+  max-width: 560px;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .home-page {
+    flex-direction: column;
+  }
+
+  .screen {
+    flex: 0 0 100%;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    min-height: 100dvh;
+  }
+
+  .workbench-header {
+    padding-top: 5vh;
+  }
+
+  .workbench-header h1 {
+    font-size: 2.6rem;
+  }
+
+  .terminal {
+    width: 92%;
+    height: 62vh;
+  }
+
+  .timeline {
+    width: 88%;
+
+    padding-left: 26px;
+  }
+
+  .timeline-dot {
+    left: -26px;
+  }
+
+  .timeline-entry p {
+    font-size: 0.72rem;
+  }
+
+  .workbench-footer {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal,
+  .ellipsis,
+  .scroll-arrow {
+    transition: none !important;
+    animation: none !important;
+  }
+}

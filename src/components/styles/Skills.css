@@ -1,0 +1,469 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'GreaterTheory';
+  src: url('/fonts/GreaterTheory.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* GreaterTheory has no Devanagari glyphs, so pair a Devanagari font under
+   the SAME font-family name, scoped to the Devanagari unicode range. */
+@font-face {
+  font-family: 'GreaterTheory';
+  src: url('/fonts/NotoSansDevanagari.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+0900-097F;
+}
+
+.skills-container {
+  width: 100%;
+  overflow-x: hidden;
+  display: grid;
+}
+
+/* ---------------- LYRICS INTRO ---------------- */
+/* Shares the same grid cell as .skills-workbench (grid-area: 1 / 1) so
+   the two overlap directly for the iris-wipe reveal, instead of
+   stacking in normal document flow (which would double the page
+   height for a moment and cause a flash). The background now matches
+   the workbench's blueprint grid + navy exactly, so there's no visual
+   seam once it transitions. */
+
+.skills-lyrics {
+  font-family: 'GreaterTheory', sans-serif;
+  grid-area: 1 / 1;
+  z-index: 10;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #071d36;
+  background-image:
+    linear-gradient(rgba(117, 165, 205, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(117, 165, 205, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.07) 1px, transparent 1px);
+  background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  word-wrap: break-word;
+  padding: 15vh 5vw 0;
+}
+
+.skills-word {
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+
+.skills-goat {
+  color: #ff3131;
+  font-weight: 900;
+  display: inline-block;
+  text-shadow:
+    0 0 8px rgba(255, 49, 49, 0.9),
+    0 0 16px rgba(255, 49, 49, 0.8),
+    0 0 24px rgba(255, 49, 49, 0.6);
+  transform: scale(1.1);
+}
+
+/* ---------------- WORKBENCH ---------------- */
+
+.skills-workbench {
+  --blueprint: #071d36;
+  --line: rgba(117, 165, 205, 0.18);
+  --line-strong: rgba(117, 165, 205, 0.35);
+  --text: #e8edf2;
+  --muted: #7790a8;
+  --red: #ff3131;
+  --copper: #d19a78;
+  --paper: #ece2c6;
+  --paper-shadow: #cfc3a0;
+  --ink: #2b2417;
+  --tape: rgba(232, 237, 242, 0.55);
+
+  position: relative;
+  grid-area: 1 / 1;
+  z-index: 11;
+  min-height: 100dvh;
+  width: 100%;
+
+  background: var(--blueprint);
+  color: var(--text);
+
+  font-family: "GreaterTheory", sans-serif;
+}
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 45px 45px;
+  pointer-events: none;
+}
+
+.blueprint-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(117, 165, 205, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.07) 1px, transparent 1px);
+  background-size: 9px 9px;
+}
+
+.workbench-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8vh 5vw 0;
+}
+
+.eyebrow,
+.revision,
+.note-kicker,
+.workbench-footer {
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.workbench-header h1 {
+  margin-top: 0.4rem;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: -2px;
+}
+
+.revision {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.65rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.revision strong {
+  color: var(--text);
+  margin-top: 5px;
+}
+
+/* ---------------- CORKBOARD ---------------- */
+/* A loose grid of sticky notes, always visible -- no pegboard, no click
+   to reveal. The 7 category notes are uniform 1x1 units on the left/
+   center; the LeetCode note is a wider 2x1 unit anchored to the right. */
+
+.corkboard {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  align-items: stretch;
+  gap: 48px;
+  width: min(1340px, 94vw);
+  margin: 7vh auto 9vh;
+}
+
+.notes-grid {
+  column-count: 3;
+  column-gap: 32px;
+}
+
+/* Shared "sticky note" building block -- paper texture, pin, tape, soft
+   shadow, slight hand-placed rotation (rotation/offset applied inline
+   per note so each one differs). break-inside/margin let notes of
+   different heights pack tightly in the column layout above instead of
+   being stretched to match a row's tallest neighbor. */
+.note-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 32px;
+  break-inside: avoid;
+  padding: 34px 28px 30px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)),
+    repeating-linear-gradient(rgba(43, 36, 23, 0.05) 0 1px, transparent 1px 30px),
+    var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 14px 0 -6px var(--paper-shadow),
+    0 20px 26px rgba(0, 0, 0, 0.4);
+}
+
+.note-pin {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8a7a, var(--red) 70%);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.note-tape {
+  position: absolute;
+  width: 84px;
+  height: 24px;
+  background: var(--tape);
+  top: 4px;
+  right: 22px;
+  transform: rotate(-6deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.note-kicker {
+  display: block;
+  font-size: 0.62rem;
+  color: rgba(43, 36, 23, 0.55);
+}
+
+.note-card h2 {
+  margin: 12px 0 18px;
+  font-size: 1.7rem;
+  line-height: 1.05;
+}
+
+.note-skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 9px;
+  margin-top: auto;
+}
+
+.note-skills span {
+  padding: 8px 12px;
+  border: 1px solid rgba(43, 36, 23, 0.3);
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: var(--ink);
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.big-brain {
+  margin-top: 80px;
+}
+
+.engine-room {
+  margin-top: 200px;
+}
+
+/* ----- LeetCode note: anchored to the top of the right column. Sized
+   to its own content rather than stretched to match the notes column
+   -- a shorter note with a little blueprint background showing below
+   it reads as "pinned higher up the board", not as a layout bug. ----- */
+
+.note-leetcode {
+  align-self: start;
+}
+
+.note-wide {
+  align-self: start;
+}
+
+.note-leetcode h2 {
+  font-size: 2.1rem;
+}
+
+.core-status {
+  margin-top: 18px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(43, 36, 23, 0.18);
+}
+
+.core-status p {
+  margin-top: 8px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: rgba(43, 36, 23, 0.55);
+}
+
+/* Solved-count and contest-rating side by side as two equally weighted
+   headline stats, instead of the rating being an afterthought chip. */
+.stat-row {
+  display: flex;
+  gap: 24px;
+}
+
+.stat-block {
+  flex: 1;
+}
+
+.stat-block > span {
+  font-family: monospace;
+  color: rgba(43, 36, 23, 0.55);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+}
+
+.stat-block strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 2.7rem;
+  line-height: 1;
+}
+
+.stat-block small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(43, 36, 23, 0.55);
+  font-family: monospace;
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+}
+
+.stat-solved strong { color: var(--red); }
+.stat-contest strong { color: #1d4f91; }
+
+.stat-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(43, 36, 23, 0.18);
+}
+
+.mini-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 18px;
+  font-family: monospace;
+  font-size: 0.62rem;
+  color: rgba(43, 36, 23, 0.6);
+}
+
+/* Secondary contest detail: global rank, top percentile, contests
+   attended, badge -- only rendered when the API actually provides it. */
+.contest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.contest-meta span {
+  padding: 6px 10px;
+  border: 1px solid rgba(29, 79, 145, 0.45);
+  background: rgba(29, 79, 145, 0.08);
+  font-family: monospace;
+  font-size: 0.6rem;
+  color: #1d4f91;
+}
+
+/* Small heatmap dropped into the LeetCode note, on top of what the
+   original workbench design had (easy/medium/hard only). Week-columns
+   wrap onto new lines instead of scrolling horizontally, so the whole
+   year packs into a compact rectangle that fits the note's width. */
+.core-calendar {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  margin-top: 24px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.core-cal-week {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.core-status > span a {
+  color: rgba(43, 36, 23, 0.45);
+  text-decoration: none;
+  font-weight: normal;
+  letter-spacing: 0;
+  font-size: 0.6rem;
+}
+
+.core-status > span a:hover {
+  color: var(--red);
+}
+
+.core-cal-day {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: rgba(43, 36, 23, 0.14);
+  border: 1px solid rgba(43, 36, 23, 0.08);
+}
+
+.core-cal-day.level-1 { background: rgba(255, 49, 49, 0.5); border-color: transparent; }
+.core-cal-day.level-2 { background: rgba(255, 49, 49, 0.65); border-color: transparent; }
+.core-cal-day.level-3 { background: rgba(255, 49, 49, 0.85); border-color: transparent; }
+.core-cal-day.level-4 { background: #ff3131; border-color: transparent; }
+
+.workbench-footer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw 5vh;
+  color: var(--muted);
+  font-size: 0.55rem;
+}
+
+@media (max-width: 1100px) {
+  .corkboard { grid-template-columns: 1fr 420px; gap: 36px; }
+  .notes-grid { column-count: 2; }
+}
+
+@media (max-width: 760px) {
+  .workbench-header { padding-top: 5vh; }
+  .workbench-header h1 { font-size: 3rem; }
+
+  .corkboard {
+    display: flex;
+    flex-direction: column;
+    width: 92vw;
+    margin-top: 5vh;
+    gap: 34px;
+  }
+
+  .notes-grid {
+    order: 1;
+    width: 100%;
+    column-count: 1;
+  }
+
+  .right-column {
+    order: -1;
+    width: 100%;
+  }
+
+  .workbench-footer { flex-direction: column; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-card {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "name": "My Bars",
+      "skills": ["Python", "Java", "JavaScript", "TypeScript", "C", "C++", "C#", "Dart"]
+    },
+    {
+      "name": "Big Brain Energy",
+      "skills": ["Reinforcement Learning", "Computer Vision", "PPO", "Stable-Baselines3", "Gymnasium", "OpenCV"]
+    },
+    {
+      "name": "The Engine Room",
+      "skills": ["FastAPI", "NestJS", "PostgreSQL", "MongoDB", "InfluxDB", "MySQL", "MariaDB", "Nginx", "Linux", "REST APIs", "System Design", "Event-Driven Architecture"]
+    },
+    {
+      "name": "Front of House",
+      "skills": ["HTML", "CSS", "Tailwind CSS", "Flutter"]
+    },
+    {
+      "name": "Wired In",
+      "skills": ["ESP32", "ESP-NOW", "MQTT", "Embedded Systems"]
+    },
+    {
+      "name": "Nuts & Bolts",
+      "skills": ["SHT35", "MPU6050", "W5500", "I2C", "SPI", "UART", "GPIO", "L298N", "LM2596", "DC Motors", "Buck Converters"]
+    },
+    {
+      "name": "Everyday Carry",
+      "skills": ["Git", "Docker"]
+    }
+  ]
+}

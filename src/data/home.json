@@ -1,0 +1,11 @@
+{
+    "intro": [
+        { "type": "heading", "text": "Aryan Sharma" },
+        { "type": "text", "text": "alias: <strong>Addision</strong>" },
+        { "type": "text", "text": "Student" },
+        { "type": "text", "text": "Software Developer" },
+        { "type": "text", "text": "FullStack Developer" },
+        { "type": "text", "text": "Embedded Systems Enthusiast" },
+        { "type": "text", "text": "Installing New Skills<span class='ellipsis'>...</span>" }
+    ]
+}

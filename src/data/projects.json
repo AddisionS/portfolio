@@ -1,0 +1,100 @@
+{
+  "projects": [
+    {
+      "name": "HTTP Server",
+      "description": "A lightweight HTTP/1.1 server built from scratch in C++ using raw Linux sockets and epoll — no frameworks. Handles non-blocking I/O, keep-alive, multiple simultaneous clients, and basic routing entirely from first principles.",
+      "stack": ["C++", "Linux Sockets", "epoll", "HTTP/1.1"],
+      "category": "Software",
+      "repository": "https://github.com/AddisionS/http-server",
+      "live": ""
+    },
+    {
+      "name": "RL Cricket Agent",
+      "description": "A vision-only reinforcement learning agent that learns to play the browser game Little Cricket Master purely from screen pixels — no game API or memory access. Uses OpenCV and Kalman filtering for real-time ball tracking, with PPO handling shot decisions.",
+      "stack": ["Python", "OpenCV", "Stable-Baselines3", "Gymnasium", "PyAutoGUI"],
+      "category": "AI/ML",
+      "repository": "https://github.com/AddisionS/cricket-vision",
+      "live": ""
+    },
+    {
+      "name": "SLCM Feedback Auto-Filler",
+      "description": "A Firefox browser extension that automatically fills out my college's feedback forms. It's picked up over 100 downloads on campus.",
+      "stack": ["JavaScript", "WebExtensions API"],
+      "category": "Software",
+      "repository": "https://github.com/AddisionS/slcm-feedback-form-filler",
+      "live": "https://addons.mozilla.org/en-US/firefox/addon/slcm-feedback-auto-fill/"
+    },
+    {
+      "name": "TrackStack",
+      "description": "A VS Code extension that tracks real active coding time per project — not just how long the window was open — and reports an efficiency percentage. Live on the VS Code Marketplace with 14 installs.",
+      "stack": ["TypeScript", "VS Code Extension API"],
+      "category": "Software",
+      "repository": "https://github.com/AddisionS/trackStack",
+      "live": "https://marketplace.visualstudio.com/items?itemName=AddisionS-1712.trackStack"
+    },
+    {
+      "name": "ASCII Video Player",
+      "description": "A real-time terminal video player that downloads YouTube videos and streams them as ASCII art, frame-by-frame, fully offline — converting frames in the background while playback runs in parallel.",
+      "stack": ["Python", "yt-dlp", "FFmpeg", "Pillow"],
+      "category": "Software",
+      "repository": "https://github.com/AddisionS/ascii-video-player",
+      "live": ""
+    },
+    {
+      "name": "Raycaster Engine",
+      "description": "A minimalist 2.5D rendering engine built in pure C with OpenGL, inspired by Wolfenstein 3D. Casts rays per screen column to fake 3D depth from a 2D grid — no shaders, no game engine, just raw trigonometry.",
+      "stack": ["C", "OpenGL", "GLUT"],
+      "category": "Software",
+      "repository": "https://github.com/AddisionS/raycaster",
+      "live": ""
+    },
+    {
+      "name": "Average Coder",
+      "description": "A simple 2D browser game built with Kaboom.js.",
+      "stack": ["JavaScript", "Kaboom.js"],
+      "category": "Web",
+      "repository": "https://github.com/AddisionS/average-coder",
+      "live": "https://addisions.github.io/average-coder/"
+    },
+    {
+      "name": "Simple Calculator",
+      "description": "A front-end calculator built with vanilla HTML, CSS, and JavaScript.",
+      "stack": ["HTML", "CSS", "JavaScript"],
+      "category": "Web",
+      "repository": "https://github.com/AddisionS/Frontend-Calculator",
+      "live": "https://addisions.github.io/Frontend-Calculator/"
+    },
+    {
+      "name": "Tic-Tac-Toe AI",
+      "description": "Tic-tac-toe with an AI opponent powered by the minimax algorithm.",
+      "stack": ["JavaScript"],
+      "category": "Web",
+      "repository": "https://github.com/AddisionS/tic-tac-toe",
+      "live": "https://addisions.github.io/tic-tac-toe/"
+    },
+    {
+      "name": "Server Watcher",
+      "description": "An IoT-based temperature and humidity monitoring system with real-time alerts and a live dashboard. Currently in use by my college to monitor their server rooms. V2 in progress.",
+      "stack": ["Flutter", "Python (FastAPI)", "InfluxDB", "SQLite", "ESP32", "SHT35", "W5500", "Embedded C++"],
+      "category": "Hardware",
+      "repository": "https://github.com/AddisionS/server-watcher",
+      "live": ""
+    },
+    {
+      "name": "Gesture Controlled Car",
+      "description": "A car that can be controlled using hand gestures.",
+      "stack": ["Arduino", "C++", "Embedded Systems"],
+      "category": "Hardware",
+      "repository": "https://github.com/AddisionS/gesture-controlled-car",
+      "live": ""
+    },
+    {
+      "name": "Krida",
+      "description": "A mobile application for booking sports facilities for MUJ and GHS, built with a team for college.",
+      "stack": ["Flutter", "Dart", "Python", "FastAPI", "React", "HTML", "MongoDB", "Redis"],
+      "category": "Software",
+      "repository": "",
+      "live": ""
+    }
+  ]
+}

@@ -1,0 +1,510 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'GreaterTheory';
+  src: url('/fonts/GreaterTheory.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.contact-container {
+  display: grid;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ---------------- LYRICS INTRO ---------------- */
+/* Shares the same grid cell as .contact-page (grid-area: 1 / 1) so the
+   two overlap directly instead of stacking in normal document flow --
+   that stacking is what caused the jarring "flash" during the
+   crossfade, since both sections briefly occupied their own ~100dvh,
+   doubling the page height for a moment. Grid overlap avoids that
+   without relying on position:absolute against a container whose
+   height would otherwise depend on .contact-page's (display:none)
+   state. */
+
+.contact-lyrics {
+  font-family: 'GreaterTheory', sans-serif;
+  grid-area: 1 / 1;
+  z-index: 10;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #071d36;
+  background-image:
+    linear-gradient(rgba(117, 165, 205, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(117, 165, 205, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.07) 1px, transparent 1px);
+  background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  word-wrap: break-word;
+  padding: 8vh 5vw 0;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+
+.goat {
+  color: #ff3131;
+  font-weight: 900;
+  display: inline-block;
+  text-shadow:
+    0 0 8px rgba(255, 49, 49, 0.9),
+    0 0 16px rgba(255, 49, 49, 0.8),
+    0 0 24px rgba(255, 49, 49, 0.6);
+  transform: scale(1.1);
+}
+
+.contact-page {
+  --blueprint: #071d36;
+  --line: rgba(117, 165, 205, 0.18);
+  --line-strong: rgba(117, 165, 205, 0.35);
+  --text: #e8edf2;
+  --muted: #7790a8;
+  --copper: #d19a78;
+  --amber: #f5a623;
+  --led-off: rgba(117, 165, 205, 0.3);
+  --led-on: #4ade80;
+
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 11;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  background: var(--blueprint);
+  color: var(--text);
+
+  font-family: "GreaterTheory", sans-serif;
+}
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 45px 45px;
+  pointer-events: none;
+}
+
+.blueprint-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(117, 165, 205, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 165, 205, 0.07) 1px, transparent 1px);
+  background-size: 9px 9px;
+}
+
+.workbench-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8vh 5vw 0;
+}
+
+.eyebrow,
+.revision,
+.section-kicker,
+.workbench-footer,
+.clock-label,
+.clock-status,
+.title-block {
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.workbench-header h1 {
+  margin-top: 0.4rem;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: -2px;
+}
+
+.revision {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.65rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.revision strong {
+  color: var(--text);
+  margin-top: 5px;
+}
+
+/* ---------------- LAYOUT ---------------- */
+/* Flex column so the middle section always fills whatever vertical
+   space is left between the header and footer, instead of leaving a
+   dead gap when the content is shorter than the viewport. */
+
+.contact-main {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 5vw;
+}
+
+/* ---------------- PORTS ---------------- */
+
+.ports-panel {
+  width: min(1000px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-kicker {
+  color: var(--muted);
+  font-size: 0.7rem;
+  margin-bottom: 7vh;
+}
+
+.ports-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 56px;
+}
+
+.port {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.port-socket {
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  background: radial-gradient(circle at 35% 30%, #1c3a5c, #081a2e 75%);
+  box-shadow:
+    inset 0 0 0 1px var(--line-strong),
+    inset 0 8px 14px rgba(0, 0, 0, 0.55),
+    0 14px 24px rgba(0, 0, 0, 0.4);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.port-socket svg {
+  width: 34px;
+  height: 34px;
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.port-led {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--led-off);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+/* ----- Shape 1: audio jack (Email) -- circular barrel with
+   concentric rings and a center pin, like a 3.5mm jack. ----- */
+
+.shape-jack {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+}
+
+.shape-jack::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 3px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 6px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 9px rgba(0, 0, 0, 0.3);
+}
+
+/* ----- Shape 2: USB-A port (GitHub) -- rectangular shell with the
+   offset internal tongue real USB-A ports have. ----- */
+
+.shape-usb {
+  width: 132px;
+  height: 78px;
+  border-radius: 8px;
+}
+
+.shape-usb::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 76%;
+  height: 32px;
+  background: #050d16;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+}
+
+/* ----- Shape 3: RJ45 ethernet port (LinkedIn) -- trapezoid body,
+   top clip tab, visible gold contact pins. ----- */
+
+.shape-eth {
+  width: 122px;
+  height: 90px;
+  border-radius: 4px;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+}
+
+.shape-eth::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 10px;
+  background: #081a2e;
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.shape-eth::after {
+  content: "";
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54%;
+  height: 12px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--copper) 0 3px,
+    transparent 3px 9px
+  );
+  opacity: 0.75;
+}
+
+/* ----- Shape 4: restricted port (Resume) -- dashed outline, dimmed,
+   no glow. Reads as present but disabled. ----- */
+
+.shape-locked {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  border: 2px dashed rgba(117, 165, 205, 0.4);
+  background: radial-gradient(circle at 35% 30%, #16283c, #050d16 75%);
+  box-shadow: inset 0 8px 14px rgba(0, 0, 0, 0.4);
+  opacity: 0.7;
+}
+
+.shape-locked svg {
+  stroke: var(--muted);
+}
+
+/* ---------------- HOVER STATES ---------------- */
+
+.port:hover .port-socket,
+.port:focus-visible .port-socket {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 0 0 1px var(--copper),
+    inset 0 8px 14px rgba(0, 0, 0, 0.55),
+    0 18px 26px rgba(0, 0, 0, 0.45),
+    0 0 22px rgba(209, 154, 120, 0.25);
+}
+
+.port:hover .port-socket svg,
+.port:focus-visible .port-socket svg {
+  stroke: var(--copper);
+}
+
+.port:hover .port-led,
+.port:focus-visible .port-led {
+  background: var(--led-on);
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+}
+
+/* Restricted port lights amber instead of green -- it's reachable,
+   just through a different, more deliberate channel. */
+.port.is-restricted:hover .port-socket,
+.port.is-restricted:focus-visible .port-socket {
+  opacity: 1;
+  box-shadow:
+    inset 0 8px 14px rgba(0, 0, 0, 0.4),
+    0 0 18px rgba(245, 166, 35, 0.3);
+}
+
+.port.is-restricted:hover .port-socket svg,
+.port.is-restricted:focus-visible .port-socket svg {
+  stroke: var(--amber);
+}
+
+.port.is-restricted:hover .port-led,
+.port.is-restricted:focus-visible .port-led {
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(245, 166, 35, 0.8);
+}
+
+.port:focus-visible {
+  outline: none;
+}
+
+.port:focus-visible .port-socket {
+  outline: 2px solid var(--copper);
+  outline-offset: 6px;
+}
+
+.port-label {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.port-label strong {
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.port-label small {
+  margin-top: 6px;
+  font-family: monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+/* ---------------- CLOCK READOUT ---------------- */
+
+.clock-readout {
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock-label {
+  color: var(--muted);
+  font-size: 0.6rem;
+}
+
+.clock-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.clock-row strong {
+  font-family: monospace;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.clock-status {
+  font-size: 0.6rem;
+  padding: 4px 9px;
+  border: 1px solid rgba(117, 165, 205, 0.35);
+}
+
+.clock-status.tone-on {
+  color: var(--led-on);
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.clock-status.tone-off {
+  color: var(--muted);
+}
+
+/* ---------------- TITLE BLOCK ---------------- */
+/* A small stamped corner plate, like the title block on an
+   engineering drawing -- doubles as a bit of visual weight to
+   balance the bottom of the page. */
+
+.title-block {
+  position: relative;
+  z-index: 5;
+  align-self: flex-end;
+  margin: 0 5vw;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.55rem;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+}
+
+.workbench-footer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  padding: 3vh 5vw 5vh;
+  color: var(--muted);
+  font-size: 0.55rem;
+}
+
+@media (max-width: 700px) {
+  .workbench-header { padding-top: 5vh; }
+  .workbench-header h1 { font-size: 2.6rem; }
+  .ports-row { gap: 36px; }
+  .clock-row strong { font-size: 1.3rem; }
+  .title-block { align-self: center; text-align: center; margin: 0 5vw; }
+  .workbench-footer { flex-direction: column; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .port-socket {
+    transition: none !important;
+    animation: none !important;
+  }
+}
