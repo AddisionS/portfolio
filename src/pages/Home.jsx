@@ -155,7 +155,7 @@ const Home = () => {
     }
 
     return () => clearTimeout(failsafe);
-  }, []);
+  });
 
   return (
     <>
