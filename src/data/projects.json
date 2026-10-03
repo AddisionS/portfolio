@@ -1,6 +1,14 @@
 {
   "projects": [
     {
+      "name": "Assembly Neural Network",
+      "description": "A handwritten-digit classifier built from scratch in x86-64 assembly. Implements a 784→128→10 neural network with ReLU, softmax, backpropagation, and per-image SGD, with every forward and backward operation implemented as NASM assembly functions. Achieves 97.85% accuracy on the MNIST test set.",
+      "stack": ["x86-64 Assembly", "NASM", "C++", "Neural Networks", "MNIST"],
+      "category": "AI/ML",
+      "repository": "https://github.com/AddisionS/assembly-neural-net",
+      "live": ""
+    },
+    {
       "name": "HTTP Server",
       "description": "A lightweight HTTP/1.1 server built from scratch in C++ using raw Linux sockets and epoll — no frameworks. Handles non-blocking I/O, keep-alive, multiple simultaneous clients, and basic routing entirely from first principles.",
       "stack": ["C++", "Linux Sockets", "epoll", "HTTP/1.1"],
