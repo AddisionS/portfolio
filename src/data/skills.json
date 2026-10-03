@@ -2,11 +2,11 @@
   "categories": [
     {
       "name": "My Bars",
-      "skills": ["Python", "Java", "JavaScript", "TypeScript", "C", "C++", "C#", "Dart"]
+      "skills": ["Python", "Java", "JavaScript", "TypeScript", "C", "C++", "C#", "Dart", "x86-64 Assembly (NASM)"]
     },
     {
       "name": "Big Brain Energy",
-      "skills": ["Reinforcement Learning", "Computer Vision", "PPO", "Stable-Baselines3", "Gymnasium", "OpenCV"]
+      "skills": ["Reinforcement Learning", "Computer Vision", "PPO", "Stable-Baselines3", "Gymnasium", "OpenCV", "Neural Networks"]
     },
     {
       "name": "The Engine Room",
